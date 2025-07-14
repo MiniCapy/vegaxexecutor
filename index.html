@@ -8,35 +8,19 @@
         body {
             margin: 0;
             padding: 0;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            background: linear-gradient(45deg, #2a1a3d, #3d1a3a, #2a1a3d, #3d1a3a);
-            background-size: 400%;
-            animation: gradient 15s ease infinite;
+            background: #8b0000;
             color: #fff;
             font-family: Arial, sans-serif;
         }
-
-        @keyframes gradient {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
         header {
             position: fixed;
             top: 0;
             width: 100%;
-            background: linear-gradient(45deg, #4b2673, #73264b);
+            background: rgba(139, 0, 0, 0.5);
             padding: 15px 20px;
             display: flex;
             align-items: center;
@@ -44,61 +28,100 @@
             -webkit-backdrop-filter: blur(10px);
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
-
         header img {
             height: 40px;
             margin-right: 20px;
         }
-
         header h1 {
             margin: 0;
             font-size: 24px;
-            background: linear-gradient(45deg, #8a2be2, #ff69b4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #ff4040;
         }
-
         .content {
             text-align: center;
             margin-top: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
         }
-
-        .content h2 {
-            font-size: 28px;
-            margin-bottom: 20px;
-        }
-
         .download-btn {
             padding: 15px 30px;
             font-size: 18px;
             border: none;
-            border-radius: 25px;
-            background: linear-gradient(45deg, #4b2673, #73264b);
+            border-radius: 8px;
+            background: #a00000;
             color: #fff;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
         }
-
-        .download-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(139, 43, 226, 0.5);
+        .section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
         }
-
-        .download-btn:active {
-            transform: scale(0.95);
+        .section img {
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #ff4040;
+            border-radius: 10px;
+        }
+        .section h2 {
+            font-size: 24px;
+            margin: 0;
+        }
+        .section p {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+        .placeholder-img {
+            width: 200px;
+            height: 200px;
+            background: #ccc;
+            color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            border: 2px solid #ff4040;
+            border-radius: 10px;
+        }
+        .logo-img {
+            height: 60px;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
     <header>
-        <img src="https://raw.githubusercontent.com/MiniCapy/Img/refs/heads/main/file_000000006320620aa63c02d58ad98c7a.png" alt="VegaX Logo">
+        <img src="https://raw.githubusercontent.com/MiniCapy/Img/refs/heads/main/V_logo_white.png" alt="VegaX Logo">
         <h1>VegaX</h1>
     </header>
     <div class="content">
-        <h2>Download VegaX Executor</h2>
-        <a href="https://github.com/1f0yt/community/releases/download/Vegax/Vega.X.apk">
-            <button class="download-btn">Download</button>
-        </a>
+        <div class="section">
+            <img src="https://raw.githubusercontent.com/MiniCapy/Img/refs/heads/main/V_logo_white.png" alt="VegaX Logo" class="logo-img">
+            <h2>Download VegaX Executor</h2>
+            <a href="https://github.com/1f0yt/community/releases/download/Vegax/Vega.X.apk">
+                <button class="download-btn">Download</button>
+            </a>
+        </div>
+        <div class="section">
+            <h2>Key System</h2>
+            <div class="placeholder-img">404</div>
+            <p>To get the access key you need to copy the key and paste it into the browser</p>
+        </div>
+        <div class="section">
+            <h2>Smooth UI</h2>
+            <img src="https://raw.githubusercontent.com/MiniCapy/Img/refs/heads/main/Screenshot_2025-07-14-23-44-50-112_com.roblox.client.jpg" alt="Smooth UI">
+        </div>
+        <div class="section">
+            <h2>Script Hub</h2>
+            <img src="https://raw.githubusercontent.com/MiniCapy/Img/refs/heads/main/Screenshot_2025-07-14-23-45-05-063_com.roblox.client.jpg" alt="Script Hub">
+        </div>
+        <div class="section">
+            <h2>Customization</h2>
+            <img src="https://raw.githubusercontent.com/MiniCapy/Img/refs/heads/main/Screenshot_2025-07-14-23-45-15-480_com.roblox.client.jpg" alt="Customization">
+        </div>
     </div>
 </body>
 </html>
