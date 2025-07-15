@@ -5,101 +5,177 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VegaX</title>
     <style>
-        body {
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #000000;
+            color: #ffffff;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            background: #000000;
-            color: #fff;
-            font-family: Arial, sans-serif;
         }
+
         header {
+            width: 100%;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
             position: fixed;
             top: 0;
-            width: 100%;
-            background: transparent;
-            padding: 15px 20px;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 182, 193, 0.3);
+        }
+
+        .header-content {
             display: flex;
             align-items: center;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 1200px;
         }
+
         header img {
             height: 40px;
             margin-right: 20px;
         }
-        header h1 {
-            margin: 0;
-            font-size: 24px;
-            color: #ffffff;
+
+        h1 {
+            color: #ffb6c1;
+            font-size: 2.5em;
+            text-shadow: 0 0 10px rgba(255, 182, 193, 0.5);
         }
+
+        .nav-buttons {
+            margin-left: auto;
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-button {
+            padding: 10px 20px;
+            background: none;
+            border: 2px solid #ffb6c1;
+            color: #ffb6c1;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background: #ffb6c1;
+            color: #000000;
+        }
+
+        .nav-button.active {
+            background: #ffb6c1;
+            color: #000000;
+        }
+
         .content {
-            text-align: center;
-            margin-top: 80px;
+            margin-top: 100px;
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 40px;
         }
-        .download-btn {
-            padding: 15px 30px;
-            font-size: 18px;
-            border: none;
-            border-radius: 6px;
-            background: #c71515;
-            color: #fff;
-            cursor: pointer;
-        }
+
         .section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #ffb6c1;
+            border-radius: 5px;
+            padding: 20px;
+            width: 100%;
+            text-align: center;
+            transition: transform 0.3s ease;
         }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+
+        .section h2 {
+            color: #ffb6c1;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .section p {
+            color: #cccccc;
+            font-size: 1em;
+            margin: 10px 0;
+        }
+
         .section img {
             max-width: 100%;
             height: auto;
+            border-radius: 5px;
+            margin: 10px 0;
         }
-        .section h2 {
-            font-size: 24px;
-            margin: 0;
+
+        .logo-img {
+            width: 120px;
+            margin-bottom: 10px;
         }
-        .section p {
-            font-size: 16px;
-            margin: 5px 0;
-        }
+
         .placeholder-img {
             width: 200px;
             height: 200px;
-            background: #ccc;
-            color: #000;
+            background: rgba(255, 182, 193, 0.2);
+            color: #ffb6c1;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 24px;
+            border-radius: 5px;
+            margin: 10px auto;
         }
-        .logo-img {
-            width: 120px;
-            margin-bottom: 10px;
+
+        .download-btn {
+            padding: 15px 30px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 5px;
+            background: #ffb6c1;
+            color: #000000;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background: #ff9999;
         }
     </style>
 </head>
 <body>
     <header>
-        <img src="https://raw.githubusercontent.com/MiniCapy/Img/refs/heads/main/V_logo_white.png" alt="VegaX Logo">
-        <h1>VegaX</h1>
+        <div class="header-content">
+            <img src="https://raw.githubusercontent.com/MiniCapy/Img/refs/heads/main/V_logo_white.png" alt="VegaX Logo">
+            <h1>VegaX</h1>
+            <div class="nav-buttons">
+                <a href="#" class="nav-button active">Home</a>
+                <a href="https://example.com/scripts" class="nav-button">Scripts</a>
+            </div>
+        </div>
     </header>
+
     <div class="content">
         <div class="section">
             <img src="https://raw.githubusercontent.com/MiniCapy/Img/refs/heads/main/V_logo_white.png" alt="VegaX Logo" class="logo-img">
             <h2>Download VegaX Executor</h2>
-            <a href="https://github.com/1f0yt/community/releases/download/Vegax/Vega.X.apk">
-                <button class="download-btn">Download</button>
-            </a>
+            <a href="https://github.com/1f0yt/community/releases/download/Vegax/Vega.X.apk" class="download-btn">Download</a>
         </div>
         <div class="section">
             <h2>Key System</h2>
