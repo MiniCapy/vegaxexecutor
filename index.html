@@ -19,6 +19,38 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .floating-dots {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .dot {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.3;
+            animation: float linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0);
+            }
+            50% {
+                transform: translate(var(--tx), var(--ty));
+            }
+            100% {
+                transform: translate(0, 0);
+            }
         }
 
         header {
@@ -40,44 +72,27 @@
             align-items: center;
             width: 100%;
             max-width: 1200px;
+            justify-content: center;
+        }
+
+        .header-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
         }
 
         header img {
             height: 40px;
             margin-right: 20px;
+            cursor: pointer;
         }
 
         h1 {
             color: #ffb6c1;
             font-size: 2.5em;
             text-shadow: 0 0 10px rgba(255, 182, 193, 0.5);
-        }
-
-        .nav-buttons {
-            margin-left: auto;
-            display: flex;
-            gap: 15px;
-        }
-
-        .nav-button {
-            padding: 10px 20px;
-            background: none;
-            border: 2px solid #ffb6c1;
-            color: #ffb6c1;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 1em;
-            transition: all 0.3s ease;
-        }
-
-        .nav-button:hover {
-            background: #ffb6c1;
-            color: #000000;
-        }
-
-        .nav-button.active {
-            background: #ffb6c1;
-            color: #000000;
+            cursor: pointer;
         }
 
         .content {
@@ -99,6 +114,7 @@
             width: 100%;
             text-align: center;
             transition: transform 0.3s ease;
+            backdrop-filter: blur(5px);
         }
 
         .section:hover {
@@ -160,14 +176,14 @@
     </style>
 </head>
 <body>
+    <div class="floating-dots" id="floatingDots"></div>
+    
     <header>
         <div class="header-content">
-            <img src="https://raw.githubusercontent.com/MiniCapy/Img/refs/heads/main/V_logo_white.png" alt="VegaX Logo">
-            <h1>VegaX</h1>
-            <div class="nav-buttons">
-                <a href="#" class="nav-button active">Home</a>
-                <a href="https://minicapy.github.io/ScriptSearch/" class="nav-button">Scripts</a>
-            </div>
+            <a href="https://vegax.vercel.app/" class="header-link">
+                <img src="https://raw.githubusercontent.com/MiniCapy/Img/refs/heads/main/V_logo_white.png" alt="VegaX Logo">
+                <h1>VegaX</h1>
+            </a>
         </div>
     </header>
 
@@ -195,5 +211,46 @@
             <img src="https://raw.githubusercontent.com/MiniCapy/Img/refs/heads/main/Screenshot_2025-07-14-23-45-15-480_com.roblox.client.jpg" alt="Customization">
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const floatingDots = document.getElementById('floatingDots');
+            const colors = ['#ffb6c1', '#ff9999', '#ff66a3', '#ff4d88', '#ff3385'];
+            
+            for (let i = 0; i < 25; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                
+                const size = Math.random() * 200 + 100;
+                dot.style.width = `${size}px`;
+                dot.style.height = `${size}px`;
+                
+                dot.style.left = `${Math.random() * 100}%`;
+                dot.style.top = `${Math.random() * 100}%`;
+                
+                dot.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                const duration = Math.random() * 60 + 60;
+                const tx = (Math.random() - 0.5) * 200;
+                const ty = (Math.random() - 0.5) * 200;
+                
+                dot.style.setProperty('--tx', `${tx}px`);
+                dot.style.setProperty('--ty', `${ty}px`);
+                dot.style.animationDuration = `${duration}s`;
+                
+                floatingDots.appendChild(dot);
+            }
+
+            const logo = document.querySelector('header img');
+            const heading = document.querySelector('header h1');
+            
+            function redirectToVegaX() {
+                window.location.href = 'https://vegax.vercel.app/';
+            }
+            
+            if (logo) logo.addEventListener('click', redirectToVegaX);
+            if (heading) heading.addEventListener('click', redirectToVegaX);
+        });
+    </script>
 </body>
 </html>
