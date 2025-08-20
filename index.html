@@ -4,17 +4,376 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VegaX</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #ffb6c1;
+            --primary-dark: #ff9999;
+            --primary-light: #ff66a3;
+            --accent-color: #ff4d88;
+            --bg-color: #000000;
+            --bg-gradient: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #000000 100%);
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+            --text-muted: #999999;
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 182, 193, 0.2);
+            --shadow-glow: 0 0 30px rgba(255, 182, 193, 0.15);
+            --shadow-hover: 0 10px 40px rgba(255, 182, 193, 0.25);
+            --border-radius: 16px;
+            --border-radius-sm: 8px;
+        }
+
+        /* AmberGlow Theme */
+        [data-theme="amber"] {
+            --primary-color: #fbbf24;
+            --primary-dark: #f59e0b;
+            --primary-light: #fcd34d;
+            --accent-color: #d97706;
+            --glass-border: rgba(251, 191, 36, 0.2);
+            --shadow-glow: 0 0 30px rgba(251, 191, 36, 0.15);
+            --shadow-hover: 0 10px 40px rgba(251, 191, 36, 0.25);
+        }
+
+        /* Emerald Theme */
+        [data-theme="emerald"] {
+            --primary-color: #10b981;
+            --primary-dark: #059669;
+            --primary-light: #34d399;
+            --accent-color: #047857;
+            --glass-border: rgba(16, 185, 129, 0.2);
+            --shadow-glow: 0 0 30px rgba(16, 185, 129, 0.15);
+            --shadow-hover: 0 10px 40px rgba(16, 185, 129, 0.25);
+        }
+
+        /* Violet Theme */
+        [data-theme="violet"] {
+            --primary-color: #8b5cf6;
+            --primary-dark: #7c3aed;
+            --primary-light: #a78bfa;
+            --accent-color: #6d28d9;
+            --glass-border: rgba(139, 92, 246, 0.2);
+            --shadow-glow: 0 0 30px rgba(139, 92, 246, 0.15);
+            --shadow-hover: 0 10px 40px rgba(139, 92, 246, 0.25);
+        }
+
+        /* Cyan Theme */
+        [data-theme="cyan"] {
+            --primary-color: #06b6d4;
+            --primary-dark: #0891b2;
+            --primary-light: #22d3ee;
+            --accent-color: #0e7490;
+            --glass-border: rgba(6, 182, 212, 0.2);
+            --shadow-glow: 0 0 30px rgba(6, 182, 212, 0.15);
+            --shadow-hover: 0 10px 40px rgba(6, 182, 212, 0.25);
+        }
+
+        /* Rose Theme */
+        [data-theme="rose"] {
+            --primary-color: #f43f5e;
+            --primary-dark: #e11d48;
+            --primary-light: #fb7185;
+            --accent-color: #be123c;
+            --glass-border: rgba(244, 63, 94, 0.2);
+            --shadow-glow: 0 0 30px rgba(244, 63, 94, 0.15);
+            --shadow-hover: 0 10px 40px rgba(244, 63, 94, 0.25);
+        }
+
+        /* Orange Theme */
+        [data-theme="orange"] {
+            --primary-color: #f97316;
+            --primary-dark: #ea580c;
+            --primary-light: #fb923c;
+            --accent-color: #c2410c;
+            --glass-border: rgba(249, 115, 22, 0.2);
+            --shadow-glow: 0 0 30px rgba(249, 115, 22, 0.15);
+            --shadow-hover: 0 10px 40px rgba(249, 115, 22, 0.25);
+        }
+
+        /* Indigo Theme */
+        [data-theme="indigo"] {
+            --primary-color: #6366f1;
+            --primary-dark: #4f46e5;
+            --primary-light: #818cf8;
+            --accent-color: #3730a3;
+            --glass-border: rgba(99, 102, 241, 0.2);
+            --shadow-glow: 0 0 30px rgba(99, 102, 241, 0.15);
+            --shadow-hover: 0 10px 40px rgba(99, 102, 241, 0.25);
+        }
+
+        /* Teal Theme */
+        [data-theme="teal"] {
+            --primary-color: #14b8a6;
+            --primary-dark: #0d9488;
+            --primary-light: #2dd4bf;
+            --accent-color: #0f766e;
+            --glass-border: rgba(20, 184, 166, 0.2);
+            --shadow-glow: 0 0 30px rgba(20, 184, 166, 0.15);
+            --shadow-hover: 0 10px 40px rgba(20, 184, 166, 0.25);
+        }
+
+        /* Lime Theme */
+        [data-theme="lime"] {
+            --primary-color: #84cc16;
+            --primary-dark: #65a30d;
+            --primary-light: #a3e635;
+            --accent-color: #4d7c0f;
+            --glass-border: rgba(132, 204, 22, 0.2);
+            --shadow-glow: 0 0 30px rgba(132, 204, 22, 0.15);
+            --shadow-hover: 0 10px 40px rgba(132, 204, 22, 0.25);
+        }
+
+        /* Fuchsia Theme */
+        [data-theme="fuchsia"] {
+            --primary-color: #d946ef;
+            --primary-dark: #c026d3;
+            --primary-light: #e879f9;
+            --accent-color: #a21caf;
+            --glass-border: rgba(217, 70, 239, 0.2);
+            --shadow-glow: 0 0 30px rgba(217, 70, 239, 0.15);
+            --shadow-hover: 0 10px 40px rgba(217, 70, 239, 0.25);
+        }
+
+        /* Sky Theme */
+        [data-theme="sky"] {
+            --primary-color: #0ea5e9;
+            --primary-dark: #0284c7;
+            --primary-light: #38bdf8;
+            --accent-color: #0369a1;
+            --glass-border: rgba(14, 165, 233, 0.2);
+            --shadow-glow: 0 0 30px rgba(14, 165, 233, 0.15);
+            --shadow-hover: 0 10px 40px rgba(14, 165, 233, 0.25);
+        }
+
+        /* Red Theme */
+        [data-theme="red"] {
+            --primary-color: #ef4444;
+            --primary-dark: #dc2626;
+            --primary-light: #f87171;
+            --accent-color: #b91c1c;
+            --glass-border: rgba(239, 68, 68, 0.2);
+            --shadow-glow: 0 0 30px rgba(239, 68, 68, 0.15);
+            --shadow-hover: 0 10px 40px rgba(239, 68, 68, 0.25);
+        }
+
+        /* Blue Theme */
+        [data-theme="blue"] {
+            --primary-color: #3b82f6;
+            --primary-dark: #2563eb;
+            --primary-light: #60a5fa;
+            --accent-color: #1d4ed8;
+            --glass-border: rgba(59, 130, 246, 0.2);
+            --shadow-glow: 0 0 30px rgba(59, 130, 246, 0.15);
+            --shadow-hover: 0 10px 40px rgba(59, 130, 246, 0.25);
+        }
+
+        /* Settings Panel */
+        .settings-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 44px;
+            height: 44px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+            color: var(--primary-color);
+        }
+
+        .settings-btn:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary-color);
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .hamburger-icon {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .hamburger-line {
+            width: 18px;
+            height: 2px;
+            background: currentColor;
+            border-radius: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .settings-btn:hover .hamburger-line:nth-child(1) {
+            transform: translateY(1px);
+        }
+
+        .settings-btn:hover .hamburger-line:nth-child(3) {
+            transform: translateY(-1px);
+        }
+
+        .settings-panel {
+            position: fixed;
+            top: 0;
+            right: -350px;
+            width: 350px;
+            height: 100vh;
+            background: var(--glass-bg);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border-left: 1px solid var(--glass-border);
+            z-index: 1002;
+            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .settings-panel.open {
+            right: 0;
+        }
+
+        .settings-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .settings-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .settings-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .settings-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: var(--glass-bg);
+            color: var(--primary-color);
+        }
+
+        .theme-section {
+            margin-bottom: 30px;
+        }
+
+        .theme-section h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+        }
+
+        .theme-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .theme-option {
+            padding: 12px;
+            border: 2px solid var(--glass-border);
+            border-radius: var(--border-radius-sm);
+            background: var(--glass-bg);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .theme-option:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+        }
+
+        .theme-option.active {
+            border-color: var(--primary-color);
+            background: rgba(var(--primary-color), 0.1);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .theme-preview {
+            width: 100%;
+            height: 30px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, var(--theme-color-1), var(--theme-color-2));
+        }
+
+        /* Theme preview colors */
+        .theme-option[data-theme="default"] .theme-preview { background: linear-gradient(135deg, #ffb6c1, #ff66a3); }
+        .theme-option[data-theme="amber"] .theme-preview { background: linear-gradient(135deg, #fbbf24, #fcd34d); }
+        .theme-option[data-theme="emerald"] .theme-preview { background: linear-gradient(135deg, #10b981, #34d399); }
+        .theme-option[data-theme="violet"] .theme-preview { background: linear-gradient(135deg, #8b5cf6, #a78bfa); }
+        .theme-option[data-theme="cyan"] .theme-preview { background: linear-gradient(135deg, #06b6d4, #22d3ee); }
+        .theme-option[data-theme="rose"] .theme-preview { background: linear-gradient(135deg, #f43f5e, #fb7185); }
+        .theme-option[data-theme="orange"] .theme-preview { background: linear-gradient(135deg, #f97316, #fb923c); }
+        .theme-option[data-theme="indigo"] .theme-preview { background: linear-gradient(135deg, #6366f1, #818cf8); }
+        .theme-option[data-theme="teal"] .theme-preview { background: linear-gradient(135deg, #14b8a6, #2dd4bf); }
+        .theme-option[data-theme="lime"] .theme-preview { background: linear-gradient(135deg, #84cc16, #a3e635); }
+        .theme-option[data-theme="fuchsia"] .theme-preview { background: linear-gradient(135deg, #d946ef, #e879f9); }
+        .theme-option[data-theme="sky"] .theme-preview { background: linear-gradient(135deg, #0ea5e9, #38bdf8); }
+        .theme-option[data-theme="red"] .theme-preview { background: linear-gradient(135deg, #ef4444, #f87171); }
+        .theme-option[data-theme="blue"] .theme-preview { background: linear-gradient(135deg, #3b82f6, #60a5fa); }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
         }
 
         body {
-            background-color: #000000;
-            color: #ffffff;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-weight: 400;
+            line-height: 1.6;
+            background: var(--bg-gradient);
+            color: var(--text-primary);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -31,40 +390,45 @@
             height: 100%;
             z-index: -1;
             overflow: hidden;
+            pointer-events: none;
+            contain: layout style paint;
         }
 
         .dot {
             position: absolute;
             border-radius: 50%;
             filter: blur(40px);
-            opacity: 0.3;
+            opacity: 0.15;
+            will-change: transform;
             animation: float linear infinite;
+            transform: translateZ(0);
+            backface-visibility: hidden;
         }
 
         @keyframes float {
-            0% {
-                transform: translate(0, 0);
+            0%, 100% {
+                transform: translate3d(0, 0, 0) scale(1);
             }
             50% {
-                transform: translate(var(--tx), var(--ty));
-            }
-            100% {
-                transform: translate(0, 0);
+                transform: translate3d(var(--tx), var(--ty), 0) scale(1.1);
             }
         }
 
         header {
             width: 100%;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            padding: 16px 24px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             display: flex;
             justify-content: center;
             align-items: center;
             position: fixed;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid rgba(255, 182, 193, 0.3);
+            border-bottom: 1px solid var(--glass-border);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            contain: layout style paint;
         }
 
         .header-content {
@@ -80,108 +444,346 @@
             align-items: center;
             text-decoration: none;
             color: inherit;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .header-link:hover {
+            transform: translateY(-2px);
         }
 
         header img {
             height: 40px;
-            margin-right: 20px;
+            width: auto;
+            margin-right: 16px;
             cursor: pointer;
+            filter: drop-shadow(0 0 10px rgba(255, 182, 193, 0.3));
+            transition: filter 0.3s ease;
+        }
+
+        header img:hover {
+            filter: drop-shadow(0 0 20px rgba(255, 182, 193, 0.5));
         }
 
         h1 {
-            color: #ffb6c1;
-            font-size: 2.5em;
-            text-shadow: 0 0 10px rgba(255, 182, 193, 0.5);
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            text-shadow: 0 0 30px rgba(255, 182, 193, 0.3);
             cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        h1:hover {
+            text-shadow: 0 0 40px rgba(255, 182, 193, 0.5);
         }
 
         .content {
             margin-top: 100px;
             width: 100%;
-            max-width: 800px;
-            padding: 20px;
+            max-width: 900px;
+            padding: 24px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 40px;
+            gap: 32px;
+            margin-bottom: 60px;
         }
 
         .section {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid #ffb6c1;
-            border-radius: 5px;
-            padding: 20px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius);
+            padding: 32px;
             width: 100%;
             text-align: center;
-            transition: transform 0.3s ease;
-            backdrop-filter: blur(5px);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+            contain: layout style paint;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .section:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary-color);
+        }
+
+        .section:hover::before {
+            opacity: 1;
         }
 
         .section h2 {
-            color: #ffb6c1;
-            font-size: 1.8em;
-            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            letter-spacing: -0.01em;
         }
 
         .section p {
-            color: #cccccc;
-            font-size: 1em;
-            margin: 10px 0;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin: 16px 0;
+            font-weight: 400;
+            line-height: 1.7;
         }
 
         .section img {
             max-width: 100%;
             height: auto;
-            border-radius: 5px;
-            margin: 10px 0;
+            border-radius: var(--border-radius-sm);
+            margin: 16px 0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .section img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 30px rgba(255, 182, 193, 0.2);
         }
 
         .logo-img {
             width: 120px;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 20px rgba(255, 182, 193, 0.4));
         }
 
         .placeholder-img {
             width: 200px;
             height: 200px;
-            background: rgba(255, 182, 193, 0.2);
-            color: #ffb6c1;
+            background: linear-gradient(135deg, rgba(255, 182, 193, 0.15), rgba(255, 102, 163, 0.25));
+            color: var(--primary-color);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
-            border-radius: 5px;
-            margin: 10px auto;
+            font-size: 2rem;
+            font-weight: 600;
+            border-radius: var(--border-radius);
+            margin: 16px auto;
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+        }
+
+        .placeholder-img:hover {
+            background: linear-gradient(135deg, rgba(255, 182, 193, 0.25), rgba(255, 102, 163, 0.35));
+            transform: scale(1.05);
         }
 
         .download-btn {
-            padding: 15px 30px;
-            font-size: 1.1em;
+            padding: 16px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
             border: none;
-            border-radius: 5px;
-            background: #ffb6c1;
+            border-radius: var(--border-radius-sm);
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
             color: #000000;
             cursor: pointer;
             text-decoration: none;
-            transition: background 0.3s ease;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 182, 193, 0.3);
+            position: relative;
+            overflow: hidden;
+            contain: layout style paint;
         }
 
         .download-btn:hover {
-            background: #ff9999;
+            background: linear-gradient(135deg, var(--primary-dark), var(--accent-color));
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 182, 193, 0.4);
+        }
+
+        .download-btn:active {
+            transform: translateY(0);
+            transition: transform 0.1s ease;
+        }
+
+        .version {
+            position: fixed;
+            bottom: 16px;
+            right: 16px;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            font-weight: 300;
+            opacity: 0.6;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 4px 8px;
+            border-radius: 4px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: opacity 0.3s ease;
+        }
+
+        .version:hover {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .content {
+                padding: 16px;
+                gap: 24px;
+                margin-top: 80px;
+            }
+
+            .section {
+                padding: 24px;
+            }
+
+            .section h2 {
+                font-size: 1.5rem;
+            }
+
+            header {
+                padding: 12px 16px;
+            }
+
+            header img {
+                height: 32px;
+                margin-right: 12px;
+            }
+
+            .settings-btn {
+                width: 40px;
+                height: 40px;
+                top: 16px;
+                left: 16px;
+            }
+
+            .hamburger-line {
+                width: 16px;
+            }
+
+            .settings-panel {
+                width: 100%;
+                right: -100%;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .dot {
+                animation: none;
+            }
+            
+            .section,
+            .download-btn,
+            .header-link {
+                transition: none;
+            }
         }
     </style>
 </head>
 <body>
     <div class="floating-dots" id="floatingDots"></div>
     
+    <!-- Settings Button -->
+    <button class="settings-btn" id="settingsBtn">
+        <div class="hamburger-icon">
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+        </div>
+    </button>
+
+    <!-- Settings Panel -->
+    <div class="settings-overlay" id="settingsOverlay"></div>
+    <div class="settings-panel" id="settingsPanel">
+        <div class="settings-header">
+            <h2 class="settings-title">Settings</h2>
+            <button class="close-btn" id="closeBtn">×</button>
+        </div>
+        
+        <div class="theme-section">
+            <h3>Theme Colors</h3>
+            <div class="theme-grid">
+                <div class="theme-option active" data-theme="default">
+                    <div class="theme-preview"></div>
+                    Default
+                </div>
+                <div class="theme-option" data-theme="amber">
+                    <div class="theme-preview"></div>
+                    AmberGlow
+                </div>
+                <div class="theme-option" data-theme="emerald">
+                    <div class="theme-preview"></div>
+                    Emerald
+                </div>
+                <div class="theme-option" data-theme="violet">
+                    <div class="theme-preview"></div>
+                    Violet
+                </div>
+                <div class="theme-option" data-theme="cyan">
+                    <div class="theme-preview"></div>
+                    Cyan
+                </div>
+                <div class="theme-option" data-theme="rose">
+                    <div class="theme-preview"></div>
+                    Rose
+                </div>
+                <div class="theme-option" data-theme="orange">
+                    <div class="theme-preview"></div>
+                    Orange
+                </div>
+                <div class="theme-option" data-theme="indigo">
+                    <div class="theme-preview"></div>
+                    Indigo
+                </div>
+                <div class="theme-option" data-theme="teal">
+                    <div class="theme-preview"></div>
+                    Teal
+                </div>
+                <div class="theme-option" data-theme="lime">
+                    <div class="theme-preview"></div>
+                    Lime
+                </div>
+                <div class="theme-option" data-theme="fuchsia">
+                    <div class="theme-preview"></div>
+                    Fuchsia
+                </div>
+                <div class="theme-option" data-theme="sky">
+                    <div class="theme-preview"></div>
+                    Sky
+                </div>
+                <div class="theme-option" data-theme="red">
+                    <div class="theme-preview"></div>
+                    Red
+                </div>
+                <div class="theme-option" data-theme="blue">
+                    <div class="theme-preview"></div>
+                    Blue
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <header>
         <div class="header-content">
             <a href="https://vegax.vercel.app/" class="header-link">
-                <img src="https://raw.githubusercontent.com/MiniCapy/Img/refs/heads/main/V_logo_white.png" alt="VegaX Logo">
+                <img src="https://raw.githubusercontent.com/MiniCapy/Img/refs/heads/main/V_logo_white.png" alt="VegaX Logo" loading="lazy">
                 <h1>VegaX</h1>
             </a>
         </div>
@@ -189,68 +791,194 @@
 
     <div class="content">
         <div class="section">
-            <img src="https://raw.githubusercontent.com/MiniCapy/Img/refs/heads/main/V_logo_white.png" alt="VegaX Logo" class="logo-img">
+            <img src="https://raw.githubusercontent.com/MiniCapy/Img/refs/heads/main/V_logo_white.png" alt="VegaX Logo" class="logo-img" loading="lazy">
             <h2>Download VegaX Executor</h2>
+            <p>Powerful script executor for enhanced gameplay experience</p>
             <a href="https://github.com/1f0yt/community/releases/download/Vegax/Vega.X.apk" class="download-btn">Download</a>
         </div>
+        
         <div class="section">
             <h2>Key System</h2>
             <div class="placeholder-img">404</div>
             <p>To get the access key you need to copy the key and paste it into the browser</p>
         </div>
+        
         <div class="section">
             <h2>Smooth UI</h2>
-            <img src="https://raw.githubusercontent.com/MiniCapy/Img/refs/heads/main/Screenshot_2025-07-14-23-44-50-112_com.roblox.client.jpg" alt="Smooth UI">
+            <p>Experience seamless interface design crafted for optimal user interaction</p>
+            <img src="https://raw.githubusercontent.com/MiniCapy/Img/refs/heads/main/Screenshot_2025-07-14-23-44-50-112_com.roblox.client.jpg" alt="Smooth UI interface" loading="lazy">
         </div>
+        
         <div class="section">
             <h2>Script Hub</h2>
-            <img src="https://raw.githubusercontent.com/MiniCapy/Img/refs/heads/main/Screenshot_2025-07-14-23-45-05-063_com.roblox.client.jpg" alt="Script Hub">
+            <p>Access a comprehensive collection of scripts and tools for enhanced functionality</p>
+            <img src="https://raw.githubusercontent.com/MiniCapy/Img/refs/heads/main/Screenshot_2025-07-14-23-45-05-063_com.roblox.client.jpg" alt="Script Hub interface" loading="lazy">
         </div>
+        
         <div class="section">
             <h2>Customization</h2>
-            <img src="https://raw.githubusercontent.com/MiniCapy/Img/refs/heads/main/Screenshot_2025-07-14-23-45-15-480_com.roblox.client.jpg" alt="Customization">
+            <p>Personalize your experience with extensive customization options and themes</p>
+            <img src="https://raw.githubusercontent.com/MiniCapy/Img/refs/heads/main/Screenshot_2025-07-14-23-45-15-480_com.roblox.client.jpg" alt="Customization options" loading="lazy">
         </div>
     </div>
+
+    <div class="version">v33</div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const floatingDots = document.getElementById('floatingDots');
-            const colors = ['#ffb6c1', '#ff9999', '#ff66a3', '#ff4d88', '#ff3385'];
+            const colors = ['#ffb6c1', '#ff9999', '#ff66a3', '#ff4d88'];
+            const dotCount = window.innerWidth < 768 ? 12 : 20;
             
-            for (let i = 0; i < 25; i++) {
+            // Создаем точки с улучшенной оптимизацией
+            const fragment = document.createDocumentFragment();
+            
+            for (let i = 0; i < dotCount; i++) {
                 const dot = document.createElement('div');
                 dot.classList.add('dot');
                 
-                const size = Math.random() * 200 + 100;
-                dot.style.width = `${size}px`;
-                dot.style.height = `${size}px`;
+                const size = Math.random() * 120 + 60;
+                dot.style.cssText = `
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${Math.random() * 100}%;
+                    top: ${Math.random() * 100}%;
+                    background-color: ${colors[Math.floor(Math.random() * colors.length)]};
+                    animation-duration: ${Math.random() * 30 + 40}s;
+                    animation-delay: ${Math.random() * 10}s;
+                    --tx: ${(Math.random() - 0.5) * 100}px;
+                    --ty: ${(Math.random() - 0.5) * 100}px;
+                `;
                 
-                dot.style.left = `${Math.random() * 100}%`;
-                dot.style.top = `${Math.random() * 100}%`;
-                
-                dot.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                
-                const duration = Math.random() * 60 + 60;
-                const tx = (Math.random() - 0.5) * 200;
-                const ty = (Math.random() - 0.5) * 200;
-                
-                dot.style.setProperty('--tx', `${tx}px`);
-                dot.style.setProperty('--ty', `${ty}px`);
-                dot.style.animationDuration = `${duration}s`;
-                
-                floatingDots.appendChild(dot);
+                fragment.appendChild(dot);
             }
+            
+            floatingDots.appendChild(fragment);
 
+            // Оптимизированные обработчики событий с debounce
             const logo = document.querySelector('header img');
             const heading = document.querySelector('header h1');
             
-            function redirectToVegaX() {
-                window.location.href = 'https://vegax.vercel.app/';
+            function redirectToVegaX(e) {
+                e.preventDefault();
+                window.open('https://vegax.vercel.app/', '_blank');
             }
             
-            if (logo) logo.addEventListener('click', redirectToVegaX);
-            if (heading) heading.addEventListener('click', redirectToVegaX);
+            if (logo) logo.addEventListener('click', redirectToVegaX, { passive: true });
+            if (heading) heading.addEventListener('click', redirectToVegaX, { passive: true });
+
+            // Intersection Observer для ленивой анимации секций
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Наблюдаем за секциями для плавного появления
+            document.querySelectorAll('.section').forEach((section, index) => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(30px)';
+                section.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+                observer.observe(section);
+            });
+
+            // Оптимизация для устройств с низкой производительностью
+            const isLowEndDevice = navigator.hardwareConcurrency <= 2 || navigator.deviceMemory <= 2;
+            
+            if (isLowEndDevice) {
+                document.querySelectorAll('.dot').forEach(dot => {
+                    dot.style.filter = 'blur(20px)';
+                    dot.style.opacity = '0.1';
+                });
+                
+                // Уменьшаем количество анимированных элементов
+                const dots = document.querySelectorAll('.dot');
+                for (let i = Math.floor(dots.length / 2); i < dots.length; i++) {
+                    dots[i].style.display = 'none';
+                }
+            }
+
+            // Паузим анимации когда вкладка неактивна
+            let isVisible = true;
+            document.addEventListener('visibilitychange', () => {
+                isVisible = !document.hidden;
+                document.querySelectorAll('.dot').forEach(dot => {
+                    dot.style.animationPlayState = isVisible ? 'running' : 'paused';
+                });
+            });
+
+            // Throttle для scroll событий
+            let ticking = false;
+            function updateScrollEffects() {
+                const scrolled = window.pageYOffset;
+                const header = document.querySelector('header');
+                
+                if (scrolled > 50) {
+                    header.style.background = 'rgba(255, 255, 255, 0.12)';
+                } else {
+                    header.style.background = 'var(--glass-bg)';
+                }
+                
+                ticking = false;
+            }
+
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    requestAnimationFrame(updateScrollEffects);
+                    ticking = true;
+                }
+            }, { passive: true });
+        });
+                    dot.style.filter = 'blur(20px)';
+                    dot.style.opacity = '0.1';
+                });
+                
+                // Уменьшаем количество анимированных элементов
+                const dots = document.querySelectorAll('.dot');
+                for (let i = Math.floor(dots.length / 2); i < dots.length; i++) {
+                    dots[i].style.display = 'none';
+                }
+            }
+
+            // Паузим анимации когда вкладка неактивна
+            let isVisible = true;
+            document.addEventListener('visibilitychange', () => {
+                isVisible = !document.hidden;
+                document.querySelectorAll('.dot').forEach(dot => {
+                    dot.style.animationPlayState = isVisible ? 'running' : 'paused';
+                });
+            });
+
+            // Throttle для scroll событий
+            let ticking = false;
+            function updateScrollEffects() {
+                const scrolled = window.pageYOffset;
+                const header = document.querySelector('header');
+                
+                if (scrolled > 50) {
+                    header.style.background = 'rgba(255, 255, 255, 0.12)';
+                } else {
+                    header.style.background = 'var(--glass-bg)';
+                }
+                
+                ticking = false;
+            }
+
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    requestAnimationFrame(updateScrollEffects);
+                    ticking = true;
+                }
+            }, { passive: true });
         });
     </script>
 </body>
-</html>
+    </html>
